@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="icon"
+      href="https://drive.google.com/uc?export=view&id=1RI2PbVmKcgqUhDAWu_i2Kn23akAdi-e"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Chikitsak AI</title>
+    <style>
+            html
+            {
+              background:#000000;
+            }
+            body {
+              height: 100%;
+              width: 100vw;
+              background: #000000;
+              background: linear-gradient(
+                180deg,
+                rgba(23, 0, 36, 1) 0%,
+                rgba(196, 0, 255, 1) 100%,
+                rgba(0, 212, 255, 1) 100%
+              );
+              overflow-x:hidden;
+            }
+            * {
+              margin: 0;
+              padding: 0;
+              font-family: "Poppins", sans-serif;
+            }
+            .bg-black {
+              background-color: black;
+              border: none;
+            }
+            .centered-container {
+              text-align: center;
+              height: calc(100vh - 220px);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+            }
+
+            .centered-text {
+              height: 100%;
+              font-size: 3em;
+              color: white;
+
+              letter-spacing: 2px;
+              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+              margin-top: 15%;
+              display: inline-flex;
+            }
+
+            .query-input {
+              padding: 10px;
+              margin-top: 20px;
+              border: 2px solid white;
+              border-radius: 8px;
+              font-size: 1.2em;
+              color: black;
+              background-color: white;
+              width: 300px;
+            }
+            .footer {
+              text-align: center;
+              padding: 10px;
+              background-color: black;
+              color: white;
+              width: 100%;
+            }
+            .navbar {
+              height: 70px;
+              background: #000000;
+              display: flex;
+              padding: 10px;
+              align-items: center;
+            }
+            .containernav {
+              padding-left: 10px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .containernav p {
+              color: #d9d9d9;
+              margin-left: 10px;
+              font-size: 24px;
+            }
+            #savebutton {
+              padding: 20px 30px 20px 30px;
+              border: none;
+              width: 40%;
+              border-radius: 20px;
+            }
+            .mainbody{
+              background-image: url('https://drive.google.com/uc?export=view&id=1RLp9sRiQvlqt3ZrzQQYL700m6GC-1XhX');
+            }
+            form{
+              background:#222222;
+              opacity:1;
+              padding:20px;
+              border-radius:20px;
+              -webkit-box-shadow: 0px 0px 15px 10px rgba(46,46,46,0.91);
+      -moz-box-shadow: 0px 0px 15px 10px rgba(46,46,46,0.91);
+      box-shadow: 0px 0px 15px 10px rgba(46,46,46,0.91);
+
+            }
+            form label {
+              display: block;
+              text-align: left;
+              font-size: 20px;
+              margin-bottom:8px;
+              color:#d9d9d9;
+            }
+            form input {
+              -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.78);
+              -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.78);
+              box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.78);
+              margin-top:20px;
+            }
+            .mainbody {
+              background:
+              width: 100%;
+              height: calc(100% - 300px);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+            .*::-webkit-scrollbar {
+              display: none;
+            }
+
+            ul {
+              list-style-type: none;
+            }
+
+            .footer {
+              height: 100px;
+            }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="containernav">
+        <img
+          src="https://drive.google.com/uc?export=view&id=1RI2PbVmKcgqUhDAWu_i2Kn23akAdi-et"
+          alt="logo"
+          width="50"
+          height="50"
+        />
+        <p>Chikitsak Ai</p>
+      </div>
+    </nav>
+    <div class="mainbody">
+      <div class="centered-container">
+        <div class="static" style="opacity: 0"></div>
+
+        <form method="POST" action="outputnew">
+          {% csrf_token %} {{form.as_p}}
+          <input type="submit" value="Save" id="savebutton" name="run" />
+        </form>
+      </div>
+    </div>
+    <div class="footer">
+      &copy; 2023 Chikitsak AI. All rights reserved.
+      <ul>
+        <li>Taranjeet Singh Bedi</li>
+        <li>Vinayak Soni</li>
+        <li>Ahhsanul Hoque</li>
+      </ul>
+    </div>
+    <script>
+      var i = 0;
+      var txt = "Ask me about any medical condition";
+      var speed = 50;
+
+      function typeWriter(targetId, text) {
+        var targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          if (i < text.length) {
+            targetElement.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(function () {
+              typeWriter(targetId, text);
+            }, speed);
+          }
+        }
+      }
+
+      function startTypewriter() {
+        typeWriter("dynamicText", txt); // Start typewriter for the dynamicText element
+        var staticText = document.querySelector(".static");
+        if (staticText) {
+          staticText.style.opacity = "1"; // Change opacity to 1 for the static text
+        }
+      }
+
+      // Call startTypewriter when the page loads
+      window.onload = startTypewriter;
+    </script>
+  </body>
+</html>
